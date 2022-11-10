@@ -1,6 +1,8 @@
 // Referencias: https://learnopengl.com/
 #include "Shaderm.h"
 
+Shaderm::Shaderm(){}
+
 Shaderm::Shaderm(const char* vertexPath, const char* fragmentPath)
 {
     // 1. retrieve the vertex/fragment source code from filePath

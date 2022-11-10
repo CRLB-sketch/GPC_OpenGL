@@ -28,7 +28,7 @@
 #include <fstream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void allInputs(GLFWwindow* window);
+void allInputs(GLFWwindow* window, Shaderm ourShader);
 
 // Resolucion de la pantalla
 const unsigned int SCR_WIDTH = 800;
@@ -40,6 +40,12 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 // Tiempo de Control
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
+
+// Texturas
+const char* nameTexture1 = "resources/textures/container.jpg";
+
+// Id para shader
+unsigned int IDShader;
 
 int main()
 {
@@ -70,8 +76,13 @@ int main()
     }
 
     glEnable(GL_DEPTH_TEST);
+        
+    Shaderm ourShader(
+        "shaders/vertexShaders/color.vs",
+        "shaders/fragmentShaders/color.fs"
+    );
 
-    Shaderm ourShader("shaders/vertexShader.vs", "shaders/fragmentShader.fs");;
+    // Shaderm ourShader("shaders/vertexShaders/color.vs", "shaders/fragmentShaders/color.fs");
     
     float vertices[] = {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -157,7 +168,7 @@ int main()
 
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true);
-    unsigned char* data = stbi_load("resources/textures/container.jpg", &width, &height, &nrChannels, 0);
+    unsigned char* data = stbi_load(nameTexture1, &width, &height, &nrChannels, 0);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -188,7 +199,7 @@ int main()
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        allInputs(window);
+        allInputs(window, ourShader);
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -228,7 +239,7 @@ int main()
     return 0;
 }
 
-void allInputs(GLFWwindow* window)
+void allInputs(GLFWwindow* window, Shaderm ourShader)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -256,6 +267,22 @@ void allInputs(GLFWwindow* window)
     // Movimiento Abajo
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         camera.ProcessKeyboard(DOWN, deltaTime);
+
+    // Control de Shaders
+    /*const char* vShaderCodeNormal;
+    const char* fShaderCodeNormal;
+    const char* vShaderCodeColor;
+    const char* fShaderCodeColor;*/
+    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) 
+    {        
+        std::cout << IDShader << std::endl;
+    }
+        
+    else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+    {
+        std::cout << IDShader << std::endl;
+    }
+        
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)

@@ -33,6 +33,11 @@
     <ClInclude Include="src\Shaderm.h" />
     <ClInclude Include="src\Shaders.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\fragmentShaders\color.fs" />
+    <None Include="shaders\vertexShaders\color.vs" />
+    <None Include="shaders\vertexShaders\toonShader.vs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

@@ -12,6 +12,8 @@ class Shaderm
 public:
     unsigned int ID;
 
+    Shaderm();
+
     Shaderm(const char* vertexPath, const char* fragmentPath);
 
     void use() const;
