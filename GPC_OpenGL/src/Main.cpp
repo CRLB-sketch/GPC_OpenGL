@@ -20,7 +20,6 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-#include "Shaders.h"
 #include "Shaderm.h"
 #include "Camera.h"
 
